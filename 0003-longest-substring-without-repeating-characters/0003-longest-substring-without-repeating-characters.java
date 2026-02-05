@@ -1,15 +1,19 @@
-class Solution {
-    public int lengthOfLongestSubstring(String s) {
-        HashSet<Character> hs=new HashSet();
-        int left=0,maxlen=0;
-        for(int right=0;right<s.length();right++){
-            while(hs.contains(s.charAt(right))){
-                hs.remove(s.charAt(left));
-                left++;
-            }
-            hs.add(s.charAt(right));
-            maxlen=Math.max(maxlen,right-left+1);
-        }
-        return maxlen;
-    }
-}
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        char_set = set()
+        left = 0
+        max_len = 0
+        
+        for right in range(len(s)):
+            # If duplicate found, shrink window from left
+            while s[right] in char_set:
+                char_set.remove(s[left])
+                left += 1
+            
+            # Add current character to the set
+            char_set.add(s[right])
+            
+            # Update max length
+            max_len = max(max_len, right - left + 1)
+        
+        return max_len
